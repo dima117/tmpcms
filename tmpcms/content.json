@@ -1,0 +1,26 @@
+﻿{
+	"efb3e495662a49308642ddd9a5a4065e": {
+		"type": "page",
+		"parameters": {
+			"content": "this is a start page"
+		}
+	},
+	"aaf164cc62b448ed92af845d0b92f6d8": {
+		"type": "page",
+		"parameters": {
+			"content": "this is a contacts page"
+		}
+	},
+	"900077380c4f4516a642f2ba8d1400e2": {
+		"type": "news",
+		"parameters": {
+
+		}
+	},
+	"648c94b0f9124483af0b63deac039056": {
+		"type": "news-item",
+		"parameters": {
+			"alias": "{alias}"
+		}
+	}
+}
