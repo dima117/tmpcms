@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Newtonsoft.Json;
+using tmpcms.Core.ContentTypes;
 
 namespace tmpcms.Core
 {
@@ -39,6 +40,7 @@ namespace tmpcms.Core
 		{
 			// init content types
 			contentTypes.Add("page", typeof(ContentTypePage));
+			contentTypes.Add("html", typeof(ContentTypeHtml));
 			contentTypes.Add("news", typeof(ContentTypeNews));
 			contentTypes.Add("news-item", typeof(ContentTypeNewsItem));
 
@@ -58,11 +60,19 @@ namespace tmpcms.Core
 
 				if (routes.ContainsKey(path))
 				{
-					var item = GetcontentItem(routes[path]);
-					var result = item.Execute(env);
+					// todo: сделать класс "роутер"
+					// todo: сделать класс "контекст запроса": параметры запроса, параметры элемента, dbcontext
+					using (var db = new CmsDbContext())
+					{
+						ContentItem contentItem = contentItems[routes[path]];
+						Type contentTypeClass = contentTypes[contentItem.type];
+						var item = Activator.CreateInstance(contentTypeClass) as IContentType;
 
-					var response = new OwinResponse(env);
-					return response.WriteAsync(result.ToString());
+						var result = item.Execute(env, contentItem.parameters, db);
+
+						var response = new OwinResponse(env);
+						return response.WriteAsync(result.ToString());
+					}
 				}
 			}
 			catch (Exception ex)
@@ -73,15 +83,6 @@ namespace tmpcms.Core
 			}
 
 			return next(env);
-		}
-
-		private IContentType GetcontentItem(Guid guid)
-		{
-			ContentItem contentType = contentItems[guid];
-			Type contentTypeClass = contentTypes[contentType.type];
-			var item = Activator.CreateInstance(contentTypeClass) as IContentType;
-
-			return item;
 		}
 	}
 

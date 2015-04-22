@@ -1,14 +1,14 @@
 ﻿{
 	"efb3e495662a49308642ddd9a5a4065e": {
-		"type": "page",
+		"type": "html",
 		"parameters": {
-			"content": "this is a start page"
+			"id": "76bd6a57-fb0f-451f-8801-b54bcd2a2725"
 		}
 	},
 	"aaf164cc62b448ed92af845d0b92f6d8": {
-		"type": "page",
+		"type": "html",
 		"parameters": {
-			"content": "this is a contacts page"
+			"id": "29f6eaba-a058-4f42-b97e-440f98c61f8a"
 		}
 	},
 	"900077380c4f4516a642f2ba8d1400e2": {
