@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using tmpcms.Core.Model;
 
-namespace tmpcms.Core
+namespace tmpcms.Core.Infrastructure
 {
 	public class CmsDbContext : DbContext
     {

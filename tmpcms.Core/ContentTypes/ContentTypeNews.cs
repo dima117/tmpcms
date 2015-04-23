@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using tmpcms.Core.Infrastructure;
 
 namespace tmpcms.Core.ContentTypes
 {
 	public class ContentTypeNews : IContentType
 	{
-		public object Execute(IDictionary<string, object> request, Dictionary<string, object> item, DbContext db)
+		public object Execute(ItemContext context)
 		{
 			return "news page content";
 		}
