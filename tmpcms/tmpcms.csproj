@@ -87,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="content.json" />
-    <Content Include="content-types.json" />
     <Content Include="routes.json" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="templates\layout.st" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

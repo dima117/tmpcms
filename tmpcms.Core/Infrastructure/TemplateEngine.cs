@@ -1,4 +1,5 @@
-﻿using Antlr4.StringTemplate;
+﻿using System.Text;
+using Antlr4.StringTemplate;
 
 namespace tmpcms.Core.Infrastructure
 {
@@ -8,7 +9,8 @@ namespace tmpcms.Core.Infrastructure
 		
 		public TemplateEngine()
 		{
-			templateGroup = new TemplateGroupDirectory("/templates");
+			var path = Helpers.GetServerPath("templates");
+			templateGroup = new TemplateGroupDirectory(path, Encoding.UTF8, '$', '$');
 		}
 
 		public Template GetTemplate(string alias)

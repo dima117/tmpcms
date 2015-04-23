@@ -1,6 +1,6 @@
 ﻿# todo
 
-1. template content type
+1. ~~template content type~~
 1. отображать список новостей из бд
 1. отображать новости из бд
 1. роутинг в бд

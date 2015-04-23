@@ -1,5 +1,0 @@
-﻿{
-	"page": "tmpcms.Core.ContentTypePage",
-	"news": "tmpcms.Core.ContentTypeNews",
-	"news-item": "tmpcms.Core.ContentTypeNewsItem"
-}

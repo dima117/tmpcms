@@ -1,16 +1,33 @@
 ﻿{
 	"efb3e495662a49308642ddd9a5a4065e": {
-		"type": "html",
+		"type": "layout",
 		"parameters": {
-			"id": "76bd6a57-fb0f-451f-8801-b54bcd2a2725"
+			"bodyid": "1bf273390aef4a7ba8dfbccf7e24c20c"
 		}
 	},
 	"aaf164cc62b448ed92af845d0b92f6d8": {
-		"type": "html",
+		"type": "layout",
 		"parameters": {
-			"id": "29f6eaba-a058-4f42-b97e-440f98c61f8a"
+			"bodyid": "c373bed9f05447c5a0113efae3b4335e"
 		}
 	},
+
+	// main
+	"1bf273390aef4a7ba8dfbccf7e24c20c": {
+		"type": "html",
+		"parameters": {
+			"id": "29f6eabaa0584f42b97e440f98c61f8a"
+		}
+	},
+
+	// contacts
+	"c373bed9f05447c5a0113efae3b4335e": {
+		"type": "html",
+		"parameters": {
+			"id": "76bd6a57fb0f451f8801b54bcd2a2725"
+		}
+	},
+
 	"900077380c4f4516a642f2ba8d1400e2": {
 		"type": "news",
 		"parameters": {

@@ -81,6 +81,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentTypes\ContentTypeLayout.cs" />
     <Compile Include="Infrastructure\CmsDbContext.cs" />
     <Compile Include="CmsModule.cs" />
     <Compile Include="ContentTypes\ContentTypeHtml.cs" />

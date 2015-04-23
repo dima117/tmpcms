@@ -35,6 +35,7 @@ namespace tmpcms.Core
 			contentTypes.Add("html", typeof(ContentTypeHtml));
 			contentTypes.Add("news", typeof(ContentTypeNews));
 			contentTypes.Add("news-item", typeof(ContentTypeNewsItem));
+			contentTypes.Add("layout", typeof(ContentTypeLayout));
 
 			// content items
 			contentItems = Helpers.ReadJsonFile<Dictionary<Guid, ContentItem>>("content.json");
@@ -51,17 +52,11 @@ namespace tmpcms.Core
 
 				if (contentItemId.HasValue)
 				{
-					ContentItem contentItem = contentItems[contentItemId.Value];
+					
 
-					using (var context = new ItemContext(templateEngine, request, contentItem.parameters))
+					using (var context = new ItemContext(templateEngine, request, contentTypes, contentItems))
 					{
-						Type contentTypeClass = contentTypes[contentItem.type];
-						var item = Activator.CreateInstance(contentTypeClass) as IContentType;
-
-						var result = item == null
-							? string.Empty
-							: item.Execute(context);
-
+						var result = context.ExecuteItem(contentItemId.Value);
 						var response = new OwinResponse(env);
 						return response.WriteAsync(result.ToString());
 					}
