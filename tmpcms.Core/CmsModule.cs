@@ -13,11 +13,22 @@ namespace tmpcms.Core
 	{
 		private static readonly Router router = new Router();
 		private static readonly TemplateEngine templateEngine = new TemplateEngine();
+		private static readonly ContentManager contentManager;
 
-		private readonly Dictionary<string, Type> contentTypes = new Dictionary<string, Type>();
-		private readonly Dictionary<Guid, ContentItem> contentItems;
+		private static readonly Dictionary<string, Type> contentTypes = new Dictionary<string, Type>();
 
 		private readonly AppFunc next;
+
+		static CmsModule()
+		{
+			// init content types
+			// todo: заменить на фабрики типов с псевдонимами и методами: создать item, инициализировать модель
+			// todo: подключать фабрики через атрибуты
+			contentTypes.Add("html", typeof(ContentItemHtml));
+			contentTypes.Add("layout", typeof(ContentItemLayout));
+
+			contentManager = new ContentManager(contentTypes);			
+		}
 
 		public CmsModule(AppFunc next)
 		{
@@ -27,18 +38,6 @@ namespace tmpcms.Core
 			}
 
 			this.next = next;
-
-			// init content types
-			// todo: заменить на фабрики типов с псевдонимами и методами: создать item, инициализировать модель
-			// todo: подключать фабрики через атрибуты
-			contentTypes.Add("page", typeof(ContentTypePage));
-			contentTypes.Add("html", typeof(ContentTypeHtml));
-			contentTypes.Add("news", typeof(ContentTypeNews));
-			contentTypes.Add("news-item", typeof(ContentTypeNewsItem));
-			contentTypes.Add("layout", typeof(ContentTypeLayout));
-
-			// content items
-			contentItems = Helpers.ReadJsonFile<Dictionary<Guid, ContentItem>>("content.json");
 		}
 
 		public Task Invoke(IDictionary<string, object> env)
@@ -52,11 +51,9 @@ namespace tmpcms.Core
 
 				if (contentItemId.HasValue)
 				{
-					
-
-					using (var context = new ItemContext(templateEngine, request, contentTypes, contentItems))
+					using (var context = new ItemContext(templateEngine, request, contentManager))
 					{
-						var result = context.ExecuteItem(contentItemId.Value);
+						var result = context.ExecuteItem(contentItemId.Value, env);
 						var response = new OwinResponse(env);
 						return response.WriteAsync(result.ToString());
 					}
@@ -71,11 +68,5 @@ namespace tmpcms.Core
 
 			return next(env);
 		}
-	}
-
-	public class ContentItem
-	{
-		public string type;
-		public Dictionary<string, object> parameters;
 	}
 }

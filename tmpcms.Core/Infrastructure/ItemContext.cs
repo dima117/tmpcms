@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Owin;
+using tmpcms.Core.Infrastructure.Interfaces;
 
 namespace tmpcms.Core.Infrastructure
 {
@@ -9,21 +10,16 @@ namespace tmpcms.Core.Infrastructure
 		public readonly TemplateEngine Templates;
 		public readonly OwinRequest Request;
 		public readonly CmsDbContext Database;
-
-		private readonly Dictionary<string, Type> contentTypes;
-		private readonly Dictionary<Guid, ContentItem> contentItems;
+		public readonly ContentManager ContentManager;
 
 		public ItemContext(
 			TemplateEngine templates, 
 			OwinRequest request, 
-			//Dictionary<string, object> options, 
-			Dictionary<string, Type> contentTypes,
-			Dictionary<Guid, ContentItem> contentItems)
+			ContentManager contentManager)
 		{
 			Templates = templates;
 			Request = request;
-			this.contentTypes = contentTypes;
-			this.contentItems = contentItems;
+			ContentManager = contentManager;
 			Database = new CmsDbContext();
 		}
 
@@ -34,15 +30,13 @@ namespace tmpcms.Core.Infrastructure
 			Database.Dispose();
 		}
 
-		public object ExecuteItem(Guid contentItemId)
+		public object ExecuteItem(Guid itemId, IDictionary<string, object> env)
 		{
-			ContentItem contentItem = contentItems[contentItemId];
-			Type contentTypeClass = contentTypes[contentItem.type];
-			var item = Activator.CreateInstance(contentTypeClass) as IContentType;
+			var item = ContentManager.LoadContentItem(itemId);
 
 			var result = item == null
 				? string.Empty
-				: item.Execute(this, contentItem.parameters);
+				: item.Execute(this, env);
 
 			return result;
 		}

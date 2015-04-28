@@ -2,10 +2,10 @@
 
 namespace tmpcms.Core.Model
 {
-	public class HtmlContent
+	public class ContentItem
 	{
 		public Guid Id { get; set; }
 
-		public string Html { get; set; }
+		public string Type { get; set; }
 	}
 }

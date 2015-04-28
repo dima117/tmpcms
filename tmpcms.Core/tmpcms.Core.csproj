@@ -81,19 +81,20 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentTypes\ContentTypeLayout.cs" />
+    <Compile Include="ContentTypes\ContentItemLayout.cs" />
     <Compile Include="Infrastructure\CmsDbContext.cs" />
     <Compile Include="CmsModule.cs" />
-    <Compile Include="ContentTypes\ContentTypeHtml.cs" />
-    <Compile Include="ContentTypes\ContentTypeNews.cs" />
-    <Compile Include="ContentTypes\ContentTypeNewsItem.cs" />
-    <Compile Include="ContentTypes\ContentTypePage.cs" />
-    <Compile Include="Infrastructure\IContentType.cs" />
+    <Compile Include="ContentTypes\ContentItemHtml.cs" />
+    <Compile Include="Infrastructure\ContentManager.cs" />
+    <Compile Include="Infrastructure\Interfaces\IContentItem.cs" />
     <Compile Include="Infrastructure\Helpers.cs" />
+    <Compile Include="Infrastructure\Interfaces\IContentItemParameter.cs" />
     <Compile Include="Infrastructure\ItemContext.cs" />
     <Compile Include="Infrastructure\Router.cs" />
     <Compile Include="Infrastructure\TemplateEngine.cs" />
-    <Compile Include="Model\HtmlContent.cs" />
+    <Compile Include="Model\ContentItem.cs" />
+    <Compile Include="Model\Parameters\HtmlContentParameter.cs" />
+    <Compile Include="Model\Parameters\ItemLinkParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using tmpcms.Core.Model;
+using tmpcms.Core.Model.Parameters;
 
 namespace tmpcms.Core.Infrastructure
 {
@@ -11,6 +11,6 @@ namespace tmpcms.Core.Infrastructure
         {
         }
 
-		public DbSet<HtmlContent> HtmlContents { get; set; }
+		public DbSet<HtmlContentParameter> HtmlContents { get; set; }
     }
 }
